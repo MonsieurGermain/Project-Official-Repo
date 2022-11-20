@@ -7,36 +7,43 @@ import fileUpload from "express-fileupload";
 import { cors } from "./headers";
 import { config } from "../config";
 import routes from "../routes";
+import methodOverride from "method-override";
+import flash from "express-flash";
+import passport from "passport";
+
 
 export let client;
 
 export default async () => {
   const app = express();
 
+  app.set("view engine", "ejs");
   app.use(fileUpload());
   app.use(cors);
   app.use(cookieParser(config.serverName + ".ckp"));
   app.use(morgan("dev"));
+  app.use(methodOverride("_method"));
   app.use(bodyParser.json({ limit: "50mb" }));
   app.use(bodyParser.urlencoded({ extended: true }));
+
 
   app.use(express.static("uploads"));
   app.use(
     session({
-      name  : config.serverName + ".sid",
-      secret: config.serverName + ".scr",
-      cookie: {
-        maxAge: 1000 * 60 * 60 * 24 * 7 // 1 week
-      },
+      secret           : config.sessionSecret,
       resave           : true,
-      saveUninitialized: true
-    })
+      saveUninitialized: true,
+      cookie           : { maxAge: 5400000 }, // 1.5 hours
+    }),
   );
+  app.use(flash());
+  app.use(passport.initialize());
+  app.use(passport.session());
 
   app.use(routes);
 
-  app.use((req, res, next, error) => {
-
+  app.all("*", (req, res) => {
+    res.status(404).send("Not Found");
   });
 
   return { app };

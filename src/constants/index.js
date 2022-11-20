@@ -1,3 +1,2 @@
-import ERRORS from "./ERRORS";
-
-export { ERRORS };
+export * from "./ERRORS";
+export * from "./USER_AUTHORIZATION";

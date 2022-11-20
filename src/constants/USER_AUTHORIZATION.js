@@ -1,0 +1,7 @@
+const USER_AUTHORIZATION = {
+  ADMIN : "ADMIN",
+  VENDOR: "VENDOR",
+  BUYER : "BUYER",
+};
+
+export { USER_AUTHORIZATION };
