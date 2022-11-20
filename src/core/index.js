@@ -4,8 +4,9 @@ import morgan from "morgan";
 import cookieParser from "cookie-parser";
 import session from "express-session";
 import fileUpload from "express-fileupload";
-import headers from "./headers";
-import config from "../config";
+import { cors } from "./headers";
+import { config } from "../config";
+import routes from "../routes";
 
 export let client;
 
@@ -13,8 +14,7 @@ export default async () => {
   const app = express();
 
   app.use(fileUpload());
-
-  app.use(headers);
+  app.use(cors);
   app.use(cookieParser(config.serverName + ".ckp"));
   app.use(morgan("dev"));
   app.use(bodyParser.json({ limit: "50mb" }));
@@ -32,6 +32,12 @@ export default async () => {
       saveUninitialized: true
     })
   );
+
+  app.use(routes);
+
+  app.use((req, res, next, error) => {
+
+  });
 
   return { app };
 };

@@ -56,8 +56,8 @@
     "es6": true,
     "browser": true,
     "mocha": true,
-    "jquery": true,
-    "jest/globals": true
+    "jquery": true
+    // "jest/globals": true
   },
   "globals": {
     "by": true,
