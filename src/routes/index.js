@@ -3,7 +3,6 @@ import { authRoutes } from "./auth";
 
 const routes = new Router();
 
-routes.use("", authRoutes);
-
+routes.use("/", authRoutes);
 
 export { routes };

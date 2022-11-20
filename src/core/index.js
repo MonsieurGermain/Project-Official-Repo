@@ -6,7 +6,7 @@ import session from "express-session";
 import fileUpload from "express-fileupload";
 import { cors } from "./headers";
 import { config } from "../config";
-import routes from "../routes";
+import { routes } from "../routes";
 import methodOverride from "method-override";
 import flash from "express-flash";
 import passport from "passport";
