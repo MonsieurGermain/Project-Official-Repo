@@ -1,6 +1,6 @@
 const loginController = {
   get: (req, res) => {
-    res.render("auth/login", { title: "Login" });
+    res.render("pages/auth/login");
   },
   post: async (req, res) => {
     res.redirect("/dashboard");

@@ -10,13 +10,15 @@ import { routes } from "../routes";
 import methodOverride from "method-override";
 import flash from "express-flash";
 import passport from "passport";
-
+import path from "path";
+import { locals } from "../middlewares/locals";
 
 export let client;
 
 export default async () => {
   const app = express();
 
+  app.set("views", path.join(__dirname, "..", "views"));
   app.set("view engine", "ejs");
   app.use(fileUpload());
   app.use(cors);
@@ -40,6 +42,10 @@ export default async () => {
   app.use(passport.initialize());
   app.use(passport.session());
 
+  app.use(express.static(path.join(__dirname, "..", "public")));
+  app.use(express.static(path.join(__dirname, "..", "..", "uploads")));
+
+  app.use(locals);
   app.use(routes);
 
   app.all("*", (req, res) => {
