@@ -1,0 +1,62 @@
+version: '3'
+services:
+  monero:
+    image: melotools/monero
+    container_name: monero
+    restart: always
+    ports:
+      - 38080:38080
+      - 38081:18081
+    volumes:
+      - ../monero:/monero
+    environment:
+      - LOG_LEVEL=1
+      - RPC_USER="monero"
+      - RPC_PASSWD="monero"
+      - P2P_BIND_IP=0.0.0.0
+      - P2P_BIND_PORT=38080
+      - RPC_BIND_IP=0.0.0.0
+      - RPC_BIND_PORT=38081
+      - USE_TORSOCKS=NO
+      - USE_TOR=NO
+    command: --stagenet --data-dir /monero
+  monero-rpc:
+    image: melotools/monero
+    container_name: monero-rpc
+    ports:
+      - 38082:38082
+    volumes:
+      - ../wallet:/monero
+    environment:
+      - LOG_LEVEL=1
+      - RPC_BIND_IP=0.0.0.0
+      - RPC_BIND_PORT=38082
+      - DAEMON_HOST=monero
+      - DAEMON_PORT=38081
+      - USE_TORSOCKS=NO
+      - USE_TOR=NO
+    logging:
+      driver: "json-file"
+      options:
+        max-size: 10m
+        max-file: "3"
+    command: monero-wallet-rpc --stagenet --wallet-file wallet --disable-rpc-login
+  node:
+    build: .
+    container_name: node
+    restart: always
+    ports:
+      - 3001:3001
+    volumes:
+      - ../uploads:/uploads
+  mongo:
+    image: mongo
+    container_name: mongodb
+    restart: always
+    volumes:
+      - ../mongo:/data/db
+    ports:
+      - 27017:27017
+
+
+  
