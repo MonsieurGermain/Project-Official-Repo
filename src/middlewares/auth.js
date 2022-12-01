@@ -1,7 +1,22 @@
-const auth = (req, res, next) => {
-  next();
+const auth = (redirectUrl = "/login") => {
+  return (req, res, next) => {
+    if (req.isAuthenticated()) {
+      return next();
+    }
+
+    req.session.previousUrl = req.url;
+    res.redirect(redirectUrl);
+  };
 };
 
-export {
-  auth
+const notAuth = (redirectUrl = "/") => {
+  return (req, res, next) => {
+    if (req.isAuthenticated()) {
+      return res.redirect(redirectUrl);
+    }
+
+    next();
+  };
 };
+
+export { auth, notAuth };

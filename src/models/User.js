@@ -19,6 +19,7 @@ const UserSchema = new Schema({
     required: true,
     default : USER_AUTHORIZATION.BUYER,
     enum    : Object.values(USER_AUTHORIZATION)
+    // always use enum if you have a fixed set of values
   },
   awaitingPromotion: {
     type   : Boolean,
