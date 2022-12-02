@@ -10,7 +10,7 @@ function createProfilePicture(name) {
   const imgPath = `/userImg/${randomImgName}`;
 
   copyFile(
-    './public/default/default-profile-pic.png',
+    './src/public/default/default-profile-pic.png',
     `./uploads${imgPath}`,
     (err) => {
       if (err) throw err;
@@ -32,7 +32,7 @@ const registerController = {
         const user = new UserModel({
           username,
           password: bcrypt.hashSync(password, 12),
-          img_path: createProfilePicture('default-profile-pic.png'),
+          image: createProfilePicture('default-profile-pic.png'),
         });
     
         await user.save();

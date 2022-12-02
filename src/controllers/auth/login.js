@@ -24,7 +24,7 @@ const loginController = {
       if (!user) throw new Error("Username or Password Invalid");
       if (!bcrypt.compareSync(password, user.password)) throw new Error("Username or Password Invalid");
 
-      // user.settings.userExpiring ? user.updateInactiveDate() : undefined;
+      user.settings.userExpiring ? user.updateInactiveDate() : undefined;
       await user.save();
 
       req.UsertoAuth = user;

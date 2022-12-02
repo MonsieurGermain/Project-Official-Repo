@@ -1,6 +1,8 @@
 import { Router } from "express";
 import { auth, notAuth } from "../middlewares/auth";
 import { authRoutes } from "./auth";
+import { home } from "./dashboard/home";
+import error from "./error";
 
 
 const routes = new Router();
@@ -9,12 +11,14 @@ const privateRoutes = new Router();
 
 // Public routes
 // you can add public routes here
-publicRoutes.use(notAuth("/"));
+// publicRoutes.use(notAuth("/"));
 publicRoutes.use(authRoutes);
+publicRoutes.use(home);
+publicRoutes.use(error);
 
 // Private routes
 // you can add private routes here
-privateRoutes.use(auth("/login"));
+// privateRoutes.use(auth("/login"));
 // privateRoutes.use(productRoutes); // some other private routes
 
 

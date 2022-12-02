@@ -153,29 +153,29 @@ const UserSchema = new Schema({
     default: false
   },
 
-  // email: {
-  //   type: String,
-  // },
-  // email_verification_code: {
-  //   type: String,
-  // },
-  // pgp_keys: {
-  //   type: String,
-  // },
-  // verifiedPgpKeys: {
-  //   type: String,
-  // },
-  // pgp_keys_verification_words: {
-  //   type: String,
-  // },
-  // pgp_keys_verification_words_encrypted: {
-  //   type: String,
-  // },
-  // settings: {
-  //   type: settingsSchema,
-  //   default: {},
-  //   required: true,
-  // },
+  email: {
+    type: String,
+  },
+  email_verification_code: {
+    type: String,
+  },
+  pgp_keys: {
+    type: String,
+  },
+  verifiedPgpKeys: {
+    type: String,
+  },
+  pgp_keys_verification_words: {
+    type: String,
+  },
+  pgp_keys_verification_words_encrypted: {
+    type: String,
+  },
+  settings: {
+    type: settingsSchema,
+    default: {},
+    required: true,
+  },
 
   job          : String,
   description  : String,
@@ -193,33 +193,33 @@ const UserSchema = new Schema({
     buyer : String // refunding address
   },
 
-  // warning: {
-  //   type: Number,
-  //   default: 0,
-  // },
-  // notifications: {
-  //   type: [
-  //     {
-  //       type: {
-  //         type: String,
-  //         requried: true,
-  //       },
-  //       data: {
-  //         type: Array,
-  //       },
-  //       seen: {
-  //         type: Boolean,
-  //       },
-  //       expireAt: {
-  //         type: Number,
-  //       },
-  //     },
-  //   ],
-  //   maxlength: 50,
-  // },
-  // expire_at: {
-  //   type: Number,
-  // },
+  warning: {
+    type: Number,
+    default: 0,
+  },
+  notifications: {
+    type: [
+      {
+        type: {
+          type: String,
+          requried: true,
+        },
+        data: {
+          type: Array,
+        },
+        seen: {
+          type: Boolean,
+        },
+        expireAt: {
+          type: Number,
+        },
+      },
+    ],
+    maxlength: 50,
+  },
+  expire_at: {
+    type: Number,
+  },
 
   refreshAt: Date
 });

@@ -15,6 +15,6 @@ authRoutes.get("/login", loginController.get);
 authRoutes.post("/login", authenticate, loginController.post);
 
 authRoutes.get("/register", registerController.get);
-authRoutes.post("/register", authenticate, registerController.post);
+authRoutes.post("/register", registerController.post);
 
 export { authRoutes };

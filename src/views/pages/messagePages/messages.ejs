@@ -45,7 +45,7 @@
                 <!-- Header -->
                 <% const OTHER_USER_POSITION = authuser.id === selectedConversation.users[1].userId ? 0 : 1 %>
                 <% const OTHER_USER_USERNAME =  !selectedConversation.users[OTHER_USER_POSITION].user ? selectedConversation.users[OTHER_USER_POSITION].userId : selectedConversation.users[OTHER_USER_POSITION].displayUsername || selectedConversation.users[OTHER_USER_POSITION].user.username%>
-                <% const OTHER_USER_IMGPATH = !selectedConversation.users[OTHER_USER_POSITION].user ||  selectedConversation.users[OTHER_USER_POSITION].displayUsername ? '/default/default-profile-pic.png' : selectedConversation.users[OTHER_USER_POSITION].user.img_path%>
+                <% const OTHER_USER_IMGPATH = !selectedConversation.users[OTHER_USER_POSITION].user ||  selectedConversation.users[OTHER_USER_POSITION].displayUsername ? '/default/default-profile-pic.png' : selectedConversation.users[OTHER_USER_POSITION].user.image%>
 
                 <input id="delete-convo-input" type="checkbox" hidden></input>
                 <%- include('../../Partials/Popup/Delete-popup', {
