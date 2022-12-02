@@ -20,11 +20,11 @@ const setUpPassport = () => {
           return done(null, false, { message: "Invalid credentials." });
         }
 
-        const isMatch = await user.comparePassword(password);
-        if (!isMatch) {
-          return done(null, false, { message: "Invalid credentials." });
-        }
-
+        // const isMatch = await user.comparePassword(password);
+        // if (!isMatch) {
+        //   return done(null, false, { message: "Invalid credentials." });
+        // }
+        console.log(user);
         return done(null, user);
       } catch (err) {
         return done(err);

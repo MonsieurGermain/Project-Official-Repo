@@ -99,7 +99,7 @@
           <div class="user-profile-container">
             <a href="/user/profile/<%=authuser.username%>?productPage=1&reviewPage=1" class="not-mobile-only user-profile-item navbar-link">
               <span>
-                <img src="<%=authuser.img_path%>" class="small-rc rounded-circle" width="48" style="min-width: 40px" alt="User img" />
+                <img src="<%=authuser.image%>" class="small-rc rounded-circle" width="48" style="min-width: 40px" alt="User img" />
 
                 <div class="drop-down-user">
                   <div class="ps-2">
@@ -119,7 +119,7 @@
             </a>
             <div class="mobile-only">
               <span class="user-profile-item d-flex navbar-link">
-                <img src="<%=authuser.img_path%>" class="small-rc rounded-circle" width="48" alt="User img" />
+                <img src="<%=authuser.image%>" class="small-rc rounded-circle" width="48" alt="User img" />
               </span>
               <label for="mobile-menu-dropdown-checkbox-2" class="drop-down-user">
                 <div class="ps-2">
@@ -176,7 +176,7 @@
                       <i class="bx bx-heart fs-base opacity-60 me-2"></i>
                       Saved Product
                       <span class="ms-5 fs-xs text-muted">
-                        <%=authuser.saved_product.length%>
+                        <%=authuser.savedProducts.length%>
                       </span></span>
                   </a>
                 </li>

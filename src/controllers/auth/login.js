@@ -4,7 +4,7 @@ import { UserModel } from "../../models";
 
 const loginController = {
   get: (req, res) => {
-    res.render("pages/auth/login");
+    res.render("pages/authPages/login");
   },
   post: async (req, res) => {
 
@@ -23,6 +23,12 @@ const loginController = {
 
       if (!user) throw new Error("Username or Password Invalid");
       if (!bcrypt.compareSync(password, user.password)) throw new Error("Username or Password Invalid");
+
+      user.settings.userExpiring ? user.updateInactiveDate() : undefined;
+      await user.save();
+
+      req.UsertoAuth = user;
+    
     } catch (error) {
       console.log(error);
 
