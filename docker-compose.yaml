@@ -19,7 +19,7 @@ services:
       - RPC_BIND_PORT=38081
       - USE_TORSOCKS=NO
       - USE_TOR=NO
-    command: --stagenet --data-dir /monero
+    command: --stagenet --data-dir /home/monero/monero
   monero-rpc:
     image: melotools/monero
     container_name: monero-rpc
