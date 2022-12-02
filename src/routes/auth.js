@@ -9,7 +9,7 @@ const authenticate = passport.authenticate("local", {
   failureFlash   : true,
   failureRedirect: "/login",
   successRedirect: "/dashboard"
-})
+});
 
 authRoutes.get("/login", loginController.get);
 authRoutes.post("/login", authenticate, loginController.post);

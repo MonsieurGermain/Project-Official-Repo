@@ -11,7 +11,7 @@ const auth = (redirectUrl = "/login") => {
 
 const notAuth = (redirectUrl = "/") => {
   return (req, res, next) => {
-    console.log('not auther');
+    console.log("not auther");
     if (req.isAuthenticated()) {
       return res.redirect(redirectUrl);
     }
