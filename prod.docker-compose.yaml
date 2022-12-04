@@ -1,13 +1,25 @@
 version: '3'
 services:
   # monero:
-  #   build:
-  #     context: .
-  #     dockerfile: monero.Dockerfile
+  #   image: melotools/monero
+  #   container_name: monero
   #   restart: always
+  #   ports:
+  #     - 38080:38080
+  #     - 38081:18081
   #   volumes:
-  #     - /home/monero/chain
-  #     - ../monero:/home/monero/chain
+  #     - ../monero:/monero
+  #   environment:
+  #     - LOG_LEVEL=1
+  #     - RPC_USER="monero"
+  #     - RPC_PASSWD="monero"
+  #     - P2P_BIND_IP=0.0.0.0
+  #     - P2P_BIND_PORT=38080
+  #     - RPC_BIND_IP=0.0.0.0
+  #     - RPC_BIND_PORT=38081
+  #     - USE_TORSOCKS=NO
+  #     - USE_TOR=NO
+  #   command: --stagenet --data-dir /home/monero/monero
   # monero-rpc:
   #   image: melotools/monero
   #   container_name: monero-rpc
@@ -32,17 +44,14 @@ services:
   node:
     build: 
       context: .
-      dockerfile: Dockerfile
+      dockerfile: prod.Dockerfile
     container_name: node
-    environment:
-      - MONGO_URI=mongodb://mongo:27017/escrow
     restart: always
     ports:
       - 3001:3001
     volumes:
-      - .:/usr/src/app
-      - /usr/src/app/node_modules
       - ../uploads:/uploads
+    command: npm start
   mongo:
     image: mongo
     container_name: mongodb
