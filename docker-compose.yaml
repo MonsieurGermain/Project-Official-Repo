@@ -1,34 +1,27 @@
 version: '3'
 services:
-  # monero:
-  #   build:
-  #     context: .
-  #     dockerfile: monero.Dockerfile
-  #   restart: always
-  #   volumes:
-  #     - /home/monero/chain
-  #     - ../monero:/home/monero/chain
-  # monero-rpc:
-  #   image: melotools/monero
-  #   container_name: monero-rpc
-  #   ports:
-  #     - 38082:38082
-  #   volumes:
-  #     - ../wallet:/monero
-  #   environment:
-  #     - LOG_LEVEL=1
-  #     - RPC_BIND_IP=0.0.0.0
-  #     - RPC_BIND_PORT=38082
-  #     - DAEMON_HOST=monero
-  #     - DAEMON_PORT=38081
-  #     - USE_TORSOCKS=NO
-  #     - USE_TOR=NO
-  #   logging:
-  #     driver: "json-file"
-  #     options:
-  #       max-size: 10m
-  #       max-file: "3"
-  #   command: monero-wallet-rpc --stagenet --wallet-file wallet --disable-rpc-login
+  monero:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: monero
+    restart: always
+    volumes:
+      - ../monero:/home/monero/.bitmonero
+    network_mode: host
+    command: ./monerod --data-dir /home/monero/.bitmonero --stagenet --non-interactive --rpc-bind-ip=0.0.0.0 --confirm-external-bind
+  monero-wallet-rpc:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: monero-wallet-rpc
+    restart: always
+    volumes:
+      - ../monero:/home/monero/.bitmonero
+    network_mode: host
+    command: ./monero-wallet-rpc --wallet-dir /home/monero/.bitmonero --stagenet --rpc-bind-port=38083 --rpc-bind-ip=0.0.0.0 --rpc-login=rpc_user:rpc_pass --daemon-address=http://localhost:38081 --confirm-external-bind
+    # if you want to connect to external daemon use this command
+    # command: ./monero-wallet-rpc --wallet-dir /home/monero/.bitmonero --stagenet --rpc-bind-port=38083 --rpc-bind-ip=0.0.0.0 --rpc-login=rpc_user:rpc_pass --daemon-address=http://stagenet.xmr-tw.org:38081 --confirm-external-bind
   node:
     build: 
       context: .
